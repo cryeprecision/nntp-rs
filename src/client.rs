@@ -155,13 +155,13 @@ impl Client {
         self.stream.flush().await
     }
 
-    /// Helper method for sending a command to the server.
-    async fn send_command(&mut self, command: Command<'_>) -> Result<(), std::io::Error> {
+    /// Send a command to the server.
+    pub async fn send_command(&mut self, command: Command<'_>) -> Result<(), std::io::Error> {
         command.write_command(&mut self.stream).await
     }
 
-    /// Helper method for reading a response from the server.
-    async fn read_response(&mut self) -> Result<Response, std::io::Error> {
+    /// Read a response from the server.
+    pub async fn read_response(&mut self) -> Result<Response, std::io::Error> {
         Response::read_response(&mut self.stream).await
     }
 
