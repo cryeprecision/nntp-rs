@@ -1,5 +1,9 @@
 name: Test
 on: [push]
+
+env:
+  RUSTFLAGS: "-D warnings"
+
 jobs:
   test:
     strategy:
@@ -16,3 +20,5 @@ jobs:
           toolchain: ${{ matrix.toolchain }}
           components: rustfmt, clippy
       - run: cargo test --release
+      - run: cargo clippy
+      - run: cargo fmt --check
